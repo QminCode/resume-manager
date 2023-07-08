@@ -1,0 +1,98 @@
+plugins {
+    id 'com.android.library'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-parcelize'
+    id 'maven-publish'
+    id 'kotlin-kapt'
+}
+task generateSourcesJar(type: Jar){
+    from android.sourceSets.main.java.srcDirs
+}
+
+android {
+    compileSdkVersion 33
+    namespace 'com.example.namespace'
+    defaultConfig {
+        minSdkVersion 24
+        targetSdkVersion 33
+        versionCode 19
+        versionName "1.1.8"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildFeatures {
+        viewBinding = true
+        dataBinding = true
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+    kotlinOptions {
+        jvmTarget = '17'
+    }
+    publishing {
+        singleVariant("release")
+    }
+}
+
+
+
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:1.8.10"
+    implementation 'androidx.core:core-ktx:1.9.0'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'com.google.android.material:material:1.8.0'
+    implementation "androidx.constraintlayout:constraintlayout:2.1.4"
+
+    //ButtonSheet
+    implementation "com.github.Kennyc1012:BottomSheetMenu:4.3.2"
+    //material-dialog
+    implementation "com.afollestad.material-dialogs:core:3.3.0"
+    api "androidx.fragment:fragment-ktx:1.5.6"
+    // 协程基础库
+    api "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4"
+    api "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4"
+    //lifecycle
+    api "androidx.lifecycle:lifecycle-runtime-ktx:2.6.1"
+    api "androidx.lifecycle:lifecycle-common-java8:2.6.1"
+    api "androidx.lifecycle:lifecycle-extensions:2.2.0"
+    // viewModel
+    api "androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1"
+    // liveData
+    api "androidx.lifecycle:lifecycle-livedata-ktx:2.6.1"
+    //Toast
+    api 'com.github.getActivity:ToastUtils:9.6'
+    //log
+    api "com.github.zhaokaiqiang.klog:library:1.6.0"
+    //万能adapter
+    api "com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.11"
+    //启动优化异步加载
+    api "com.effective.android:anchors:1.1.1"
+    //状态栏
+    api "com.gyf.immersionbar:immersionbar:3.0.0"
+    api "com.gyf.immersionbar:immersionbar-ktx:3.0.0"
+    //刷新头
+    api "com.scwang.smart:refresh-layout-kernel:2.0.1"
+    api "com.scwang.smart:refresh-header-classics:2.0.1"
+    //利用liveData发送消息
+    api 'com.kunminx.arch:unpeek-livedata:7.8.0'
+    //通过标签直接生成shape，无需再写shape.xml
+    api "com.noober.background:core:1.6.5"
+    //rxHttp
+    api "com.squareup.okhttp3:okhttp:4.10.0"
+    api 'com.github.liujingxing.rxhttp:rxhttp:3.0.2'
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+
+}
