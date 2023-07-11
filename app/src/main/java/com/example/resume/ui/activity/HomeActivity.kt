@@ -24,7 +24,7 @@ import com.kennyc.bottomsheet.BottomSheetMenuDialogFragment
  * @description: 首页
  * @version:
  */
-class HomeActivity: BottomSheetListener, BaseActivity<ListViewModel, ActivityHomeBinding>() {
+class HomeActivity: BaseActivity<ListViewModel, ActivityHomeBinding>() {
 
     override fun initView(savedInstanceState: Bundle?) {
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
@@ -40,40 +40,4 @@ class HomeActivity: BottomSheetListener, BaseActivity<ListViewModel, ActivityHom
     }
 
 
-    override fun onSheetDismissed(
-        bottomSheet: BottomSheetMenuDialogFragment,
-        `object`: Any?,
-        dismissEvent: Int
-    ) {
-        "onSheetDismissed $dismissEvent".logV()
-    }
-
-    override fun onSheetItemSelected(
-        bottomSheet: BottomSheetMenuDialogFragment,
-        item: MenuItem,
-        `object`: Any?
-    ) {
-        when(item.itemId) {
-            R.id.add_byFile -> {
-                val intent = Intent(Intent.ACTION_OPEN_DOCUMENT)
-                intent.type = "*/*" // 可选：指定所需的MIME类型，例如 "image/*"（图片）或 "application/pdf"（PDF）
-                intent.addCategory(Intent.CATEGORY_OPENABLE)
-                startActivityForResult(intent,1)
-            }
-            R.id.addManuallyFragment -> item.onNavDestinationSelected(findNavController(R.id.nav_host_fragment))
-        }
-    }
-
-
-
-    override fun onSheetShown(bottomSheet: BottomSheetMenuDialogFragment, `object`: Any?) {
-        "onSheetShown with Object ".logV()
-    }
-
-//    fun toStartFragment(fragment: Fragment) {
-//        val fragmentManager = supportFragmentManager
-//        val fragmentTransaction = fragmentManager.beginTransaction()
-//        fragmentTransaction.add(androidx.fragment.R.id.fragment_container_view_tag, fragment)
-//        fragmentTransaction.commit()
-//    }
 }
