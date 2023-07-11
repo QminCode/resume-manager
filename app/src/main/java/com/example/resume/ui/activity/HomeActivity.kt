@@ -1,12 +1,35 @@
 package com.example.resume.ui.activity
 
+import android.R.attr
+import android.app.Activity
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
-import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.setupWithNavController
 import com.example.resume.R
 import com.example.resume.base.BaseActivity
 import com.example.resume.databinding.ActivityHomeBinding
 import com.example.resume.ui.fragment.viewmodel.ListViewModel
+import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.ListFragment
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.NavigationUI
+import androidx.navigation.ui.onNavDestinationSelected
+import androidx.navigation.ui.setupWithNavController
+import androidx.viewpager2.adapter.FragmentStateAdapter
+import androidx.viewpager2.widget.ViewPager2
+import com.example.mvvm.ext.logV
+import com.example.resume.R
+import com.example.resume.base.BaseActivity
+import com.example.resume.databinding.ActivityHomeBinding
+import com.example.resume.ui.fragment.StatisticsFragment
+import com.example.resume.ui.fragment.TalentProfileFragment
+import com.example.resume.ui.viewmodel.ListViewModel
+import com.kennyc.bottomsheet.BottomSheetListener
+import com.kennyc.bottomsheet.BottomSheetMenuDialogFragment
+
 
 /**
  * @author: playboi_YzY
@@ -17,8 +40,26 @@ import com.example.resume.ui.fragment.viewmodel.ListViewModel
 class HomeActivity: BaseActivity<ListViewModel, ActivityHomeBinding>() {
 
     override fun initView(savedInstanceState: Bundle?) {
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
-        mBind.bottomNavigationView.setupWithNavController(navHostFragment.navController)
+       // val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        //val navController=findNavController(R.id.nav_host_fragment)
+        //mBind.bottomNavigationView.setupWithNavController(navController)
+       // NavigationUI.setupWithNavController(mBind.bottomNavigationView,navController)
+        mBind.viewPager2.initMain(this)
+        mBind.bottomNavigationView.setOnItemSelectedListener{
+            when(it.itemId){
+                R.id.listFragment ->mBind.viewPager2.setCurrentItem(0,true)
+                R.id.talentProfileFragment->mBind.viewPager2.setCurrentItem(1,true)
+                R.id.statisticsFragment->mBind.viewPager2.setCurrentItem(2,true)
+            }
+            true
+        }
+
+        mBind.viewPager2.registerOnPageChangeCallback(object :
+            ViewPager2.OnPageChangeCallback() {
+            override fun onPageSelected(position: Int) {
+                mBind.bottomNavigationView.selectedItemId=mBind.bottomNavigationView.menu.getItem(position).itemId
+            }
+        })
 
     }
 
@@ -29,4 +70,29 @@ class HomeActivity: BaseActivity<ListViewModel, ActivityHomeBinding>() {
         mViewModel.getList(isRefresh = true, loadingXml = true)
     }
 
+
+}
+//初始化 viewpager 的adapter
+fun ViewPager2.initMain(activity: HomeActivity): ViewPager2 {
+    //是否可滑动
+    this.isUserInputEnabled = true
+    this.offscreenPageLimit = 2
+    //设置适配器
+    adapter = object : FragmentStateAdapter(activity) {
+        override fun createFragment(position: Int): Fragment {
+            return when (position) {
+                0 -> {
+                    com.example.resume.ui.fragment.ListFragment()
+                }
+                1 -> {
+                    TalentProfileFragment()
+                }
+                else -> {
+                    StatisticsFragment()
+                }
+            }
+        }
+        override fun getItemCount() = 3
+    }
+    return this
 }
