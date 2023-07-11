@@ -22,8 +22,5 @@
             android:id="@+id/action_listFragment_to_addFragment"
             app:destination="@id/addManuallyFragment" />
     </fragment>
-    <fragment
-        android:id="@+id/talentProfileFragment"
-        android:name="com.example.resume.ui.fragment.TalentProfileFragment"
-        android:label="TalentProfileFragment" />
+
 </navigation>
