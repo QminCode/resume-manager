@@ -17,6 +17,7 @@ import com.example.mvvm.ext.loadMore
 import com.example.mvvm.ext.logD
 import com.example.mvvm.ext.logV
 import com.example.mvvm.ext.refresh
+import com.example.mvvm.ext.toast
 import com.example.mvvm.util.decoration.DividerOrientation
 import com.example.resume.R
 import com.example.resume.base.BaseFragment
@@ -25,8 +26,10 @@ import com.example.resume.ui.adapter.ListAdapter
 import com.example.resume.ui.viewmodel.ListViewModel
 import com.kennyc.bottomsheet.BottomSheetListener
 import com.kennyc.bottomsheet.BottomSheetMenuDialogFragment
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import rxhttp.toAwait
+import rxhttp.toFlow
 import rxhttp.wrapper.param.RxHttp
 import java.io.FileOutputStream
 import java.io.InputStream
@@ -148,8 +151,10 @@ class ListFragment : BottomSheetListener, BaseFragment<ListViewModel, FragmentLi
                     val result=RxHttp.postForm("http://shuzhirecruit.nat300.top/uploader")
                         .addFile("file", tempFile)
                         .addHeader("TYPE",mimeType)
-                        .toAwait<String>()
-                        .await()
+                        .toFlow<String>()
+                        .collect{
+                            "上传成功".toast()
+                        }
 
                 }
 
