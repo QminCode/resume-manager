@@ -13,4 +13,5 @@
         android:id="@+id/statisticsFragment"
         android:icon="@drawable/tonji"
         android:title="统计"/>
+
 </menu>

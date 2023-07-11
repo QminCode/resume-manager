@@ -10,17 +10,13 @@
         android:name="com.example.resume.ui.fragment.AddManuallyFragment"
         android:label="fragment_add"
         tools:layout="@layout/fragment_add" >
-        <action
-            android:id="@+id/action_addFragment_to_listFragment"
-            app:destination="@id/listFragment" />
+
     </fragment>
     <fragment
         android:id="@+id/listFragment"
         android:name="com.example.resume.ui.fragment.ListFragment"
         android:label="ListFragment" >
-        <action
-            android:id="@+id/action_listFragment_to_addFragment"
-            app:destination="@id/addManuallyFragment" />
+
     </fragment>
     <fragment
         android:id="@+id/talentProfileFragment"
