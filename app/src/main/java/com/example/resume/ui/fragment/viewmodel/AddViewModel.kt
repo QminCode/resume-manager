@@ -1,4 +1,4 @@
-package com.example.resume.ui.viewmodel
+package com.example.resume.ui.fragment.viewmodel
 
 import com.example.mvvm.base.BaseViewModel
 

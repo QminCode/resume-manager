@@ -20,7 +20,7 @@ import com.example.resume.R
 import com.example.resume.base.BaseFragment
 import com.example.resume.databinding.FragmentListBinding
 import com.example.resume.ui.adapter.ListAdapter
-import com.example.resume.ui.viewmodel.ListViewModel
+import com.example.resume.ui.fragment.viewmodel.ListViewModel
 import com.gyf.immersionbar.ImmersionBar
 import com.kennyc.bottomsheet.BottomSheetListener
 import com.kennyc.bottomsheet.BottomSheetMenuDialogFragment
@@ -103,7 +103,7 @@ class ListFragment : BottomSheetListener, BaseFragment<ListViewModel, FragmentLi
         `object`: Any?
     ) {
         when(item.itemId) {
-            R.id.add_byFile -> "click".toast()
+            R.id.add_byFile -> "c".toast()
             //在menuitem中使用Navigation，此时menu的id要与nav中的fragment的id一致
             R.id.addManuallyFragment -> item.onNavDestinationSelected(findNavController())
         }
