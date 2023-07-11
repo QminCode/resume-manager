@@ -63,6 +63,6 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
     kapt 'com.github.liujingxing.rxhttp:rxhttp-compiler:3.0.2'
     implementation "com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.11"
-
+    //抽屉布局
     implementation "com.github.Kennyc1012:BottomSheetMenu:4.3.2"
 }

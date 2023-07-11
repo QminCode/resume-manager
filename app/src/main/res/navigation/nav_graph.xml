@@ -22,4 +22,14 @@
             android:id="@+id/action_listFragment_to_addFragment"
             app:destination="@id/addManuallyFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/postMatchingFragment"
+        android:name="com.example.resume.ui.fragment.PostMatchingFragment"
+        android:label="fragment_post_matching"
+        tools:layout="@layout/fragment_post_matching" />
+    <fragment
+        android:id="@+id/statisticsFragment"
+        android:name="com.example.resume.ui.fragment.StatisticsFragment"
+        android:label="fragment_statistics"
+        tools:layout="@layout/fragment_statistics" />
 </navigation>

@@ -3,8 +3,10 @@ package com.example.resume.ui.activity
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
 import androidx.navigation.ui.onNavDestinationSelected
+import androidx.navigation.ui.setupWithNavController
 import com.example.mvvm.ext.*
 import com.example.resume.R
 import com.example.resume.base.BaseActivity
@@ -22,22 +24,8 @@ import com.kennyc.bottomsheet.BottomSheetMenuDialogFragment
 class HomeActivity: BottomSheetListener, BaseActivity<ListViewModel, ActivityHomeBinding>() {
 
     override fun initView(savedInstanceState: Bundle?) {
-
-//        mToolBar.apply {
-//            title = "简历"
-//            setOnMenuItemClickListener{
-//                when (it.itemId) {
-//                    R.id.toolbar_menu_add ->
-//                        BottomSheetMenuDialogFragment.Builder(
-//                            context = this@HomeActivity,
-//                            sheet = R.menu.list_sheet,
-//                            listener = this@HomeActivity,
-//                            `object` = "some object"
-//                        ).show(supportFragmentManager)
-//                }
-//                false
-//            }
-//        }
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        mBind.bottomNavigationView.setupWithNavController(navHostFragment.navController)
 
     }
 

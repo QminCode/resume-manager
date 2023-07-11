@@ -104,6 +104,7 @@ class ListFragment : BottomSheetListener, BaseFragment<ListViewModel, FragmentLi
     ) {
         when(item.itemId) {
             R.id.add_byFile -> "click".toast()
+            //在menuitem中使用Navigation，此时menu的id要与nav中的fragment的id一致
             R.id.addManuallyFragment -> item.onNavDestinationSelected(findNavController())
         }
     }
