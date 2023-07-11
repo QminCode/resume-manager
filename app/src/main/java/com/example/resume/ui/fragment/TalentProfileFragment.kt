@@ -32,6 +32,7 @@ import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.unit.dp
 import androidx.fragment.app.Fragment
 import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
@@ -49,17 +50,15 @@ import rxhttp.wrapper.param.RxHttp
  *@date :2023-07-10 15:39
  */
 class TalentProfileFragment :Fragment() {
-    var itemList = mutableStateListOf<InformItem>()
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
 
-
         return ComposeView(requireContext()).apply {
             setContent {
-
                 TalentProfileFragmentView()
             }
         }
@@ -71,12 +70,14 @@ class TalentProfileFragment :Fragment() {
 
     @Composable
     fun TalentProfileFragmentView(){
+        val itemList = remember() {
+            mutableStateListOf<InformItem>()
+        }
         LazyColumn(){
             item {
                 Column (modifier = Modifier
                     .padding(10.dp)) {
-
-                    var textName by remember {
+                    var textName by rememberSaveable {
                         mutableStateOf("")
                     }
                     Text(text = "职位名", Modifier.padding(start = 30.dp), fontSize = 20.sp)
@@ -106,7 +107,7 @@ class TalentProfileFragment :Fragment() {
                         ),
 
                         )
-                    var textDescribe by remember {
+                    var textDescribe by rememberSaveable {
                         mutableStateOf("")
                     }
                     Text(
@@ -140,6 +141,7 @@ class TalentProfileFragment :Fragment() {
                         ),
 
                         )
+
                     Button(
                         onClick = { lifecycleScope.launch {
                             var newItem=RxHttp.get("http://shuzhirecruit.nat300.top/similarity_v2/${textName}。${textDescribe}。").toAwait<Inform>().await()
@@ -155,9 +157,15 @@ class TalentProfileFragment :Fragment() {
                     ) { Text(text = "提交") }
                 }
             }
+
             items(itemList) {
-                Column(Modifier.padding(10.dp).background(Color(0xfff6f9fc), shape = RoundedCornerShape(4.dp))) {
-                    Spacer(modifier = Modifier.fillMaxWidth().height(5.dp))
+                Column(
+                    Modifier
+                        .padding(10.dp)
+                        .background(Color(0xfff6f9fc), shape = RoundedCornerShape(4.dp))) {
+                    Spacer(modifier = Modifier
+                        .fillMaxWidth()
+                        .height(5.dp))
                     Row(Modifier.fillMaxWidth(),
                         horizontalArrangement = Arrangement.Center,
                         verticalAlignment = Alignment.CenterVertically) {
