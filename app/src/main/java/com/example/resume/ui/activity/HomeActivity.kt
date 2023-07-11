@@ -21,7 +21,7 @@ import com.kennyc.bottomsheet.BottomSheetMenuDialogFragment
  * @description: 首页
  * @version:
  */
-class HomeActivity: BottomSheetListener, BaseActivity<ListViewModel, ActivityHomeBinding>() {
+class HomeActivity: BaseActivity<ListViewModel, ActivityHomeBinding>() {
 
     override fun initView(savedInstanceState: Bundle?) {
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
@@ -36,34 +36,4 @@ class HomeActivity: BottomSheetListener, BaseActivity<ListViewModel, ActivityHom
         mViewModel.getList(isRefresh = true, loadingXml = true)
     }
 
-
-    override fun onSheetDismissed(
-        bottomSheet: BottomSheetMenuDialogFragment,
-        `object`: Any?,
-        dismissEvent: Int
-    ) {
-        "onSheetDismissed $dismissEvent".logV()
-    }
-
-    override fun onSheetItemSelected(
-        bottomSheet: BottomSheetMenuDialogFragment,
-        item: MenuItem,
-        `object`: Any?
-    ) {
-        when(item.itemId) {
-            R.id.add_byFile -> "click".toast()
-            R.id.addManuallyFragment -> item.onNavDestinationSelected(findNavController(R.id.nav_host_fragment))
-        }
-    }
-
-    override fun onSheetShown(bottomSheet: BottomSheetMenuDialogFragment, `object`: Any?) {
-        "onSheetShown with Object ".logV()
-    }
-
-//    fun toStartFragment(fragment: Fragment) {
-//        val fragmentManager = supportFragmentManager
-//        val fragmentTransaction = fragmentManager.beginTransaction()
-//        fragmentTransaction.add(androidx.fragment.R.id.fragment_container_view_tag, fragment)
-//        fragmentTransaction.commit()
-//    }
 }

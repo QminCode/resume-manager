@@ -6,7 +6,7 @@
         android:icon="@drawable/liebiao"
         android:title="简历"/>
     <item
-        android:id="@+id/postMatchingFragment"
+        android:id="@+id/talentProfileFragment"
         android:icon="@drawable/rengang"
         android:title="人岗匹配"/>
     <item
