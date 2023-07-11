@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.MenuItem
 import com.example.resume.base.BaseActivity
 import com.example.resume.databinding.FragmentListBinding
-import com.example.resume.ui.viewmodel.ListViewModel
+import com.example.resume.ui.fragment.viewmodel.ListViewModel
 import com.kennyc.bottomsheet.BottomSheetListener
 import com.kennyc.bottomsheet.BottomSheetMenuDialogFragment
 

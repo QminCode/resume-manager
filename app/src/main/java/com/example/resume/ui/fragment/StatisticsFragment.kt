@@ -1,60 +1,224 @@
 package com.example.resume.ui.fragment
 
+import android.graphics.Color
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import com.example.resume.R
+import com.example.resume.base.BaseFragment
+import com.example.resume.databinding.FragmentStatisticsBinding
+import com.example.resume.ui.fragment.viewmodel.StatisticsViewModel
+import com.github.mikephil.charting.animation.Easing
+import com.github.mikephil.charting.charts.PieChart
+import com.github.mikephil.charting.components.Legend
+import com.github.mikephil.charting.data.Entry
+import com.github.mikephil.charting.data.PieData
+import com.github.mikephil.charting.data.PieDataSet
+import com.github.mikephil.charting.data.PieEntry
+import com.github.mikephil.charting.formatter.PercentFormatter
+import com.github.mikephil.charting.highlight.Highlight
+import com.github.mikephil.charting.listener.OnChartValueSelectedListener
+import com.github.mikephil.charting.utils.ColorTemplate
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
 /**
- * A simple [Fragment] subclass.
- * Use the [StatisticsFragment.newInstance] factory method to
- * create an instance of this fragment.
+ * 统计和数据可视化
  */
-class StatisticsFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+class StatisticsFragment : OnChartValueSelectedListener,BaseFragment<StatisticsViewModel, FragmentStatisticsBinding>() {
+    override fun initView(savedInstanceState: Bundle?) {
+        //初始化饼图
+        val eduChart = mBind.eduChart
+        val ageChart = mBind.ageChart
+        val expChart = mBind.expChart
+        initChart(eduChart)
+        initChart(ageChart)
+        initChart(expChart)
+        setEduData(eduChart)
+        setAgeData(ageChart)
+        setExpData(expChart)
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_statistics, container, false)
+    override fun onValueSelected(e: Entry?, h: Highlight?) {
+
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment StatisticsFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            StatisticsFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    override fun onNothingSelected() {
+
     }
+
+    /**
+      * @description 初始化饼图
+      * @param
+      * @return
+      */
+    private fun initChart(eduChart : PieChart){
+        eduChart.setUsePercentValues(true)
+        eduChart.description.isEnabled = false
+        eduChart.setExtraOffsets(5f, 10f, 5f, 5f)
+        eduChart.dragDecelerationFrictionCoef = 0.95f
+        eduChart.extraTopOffset
+        eduChart.setExtraOffsets(20f, 0f, 20f, 0f)
+        eduChart.isDrawHoleEnabled = true
+        eduChart.setHoleColor(Color.WHITE)
+
+        eduChart.setTransparentCircleColor(Color.WHITE)
+        eduChart.setTransparentCircleAlpha(110)
+
+        eduChart.holeRadius = 58f
+        eduChart.transparentCircleRadius = 61f
+
+        eduChart.setDrawCenterText(true)
+
+        eduChart.rotationAngle = 0f
+        // enable rotation of the chart by touch
+        // enable rotation of the chart by touch
+        eduChart.isRotationEnabled = true
+        eduChart.isHighlightPerTapEnabled = true
+
+
+        eduChart.setOnChartValueSelectedListener(this)
+        eduChart.animateY(1400, Easing.EaseInOutQuad)
+        val l = eduChart.legend
+        l.verticalAlignment = Legend.LegendVerticalAlignment.TOP
+        l.horizontalAlignment = Legend.LegendHorizontalAlignment.RIGHT
+        l.orientation = Legend.LegendOrientation.VERTICAL
+        l.setDrawInside(false)
+        l.isEnabled = false
+    }
+
+    private fun setEduData(chart : PieChart){
+        val entries = ArrayList<PieEntry>()
+
+        // NOTE: The order of the entries when being added to the entries array determines their position around the center of
+        // the chart.
+        entries.add(
+            PieEntry(
+                mViewModel.getEduData().PhD.toFloat(),
+                "博士"
+            )
+        )
+        entries.add(
+            PieEntry(
+                mViewModel.getEduData().master.toFloat(),
+                "硕士"
+            )
+        )
+        entries.add(
+            PieEntry(
+                mViewModel.getEduData().undergraduate.toFloat(),
+                "本科"
+            )
+        )
+        chart.centerText = "学历"
+        val dataSet = PieDataSet(entries, "学历")
+        setCharData(dataSet, chart)
+    }
+
+    private fun setAgeData(chart : PieChart){
+        val entries = ArrayList<PieEntry>()
+        entries.add(
+            PieEntry(
+                mViewModel.getAgeData().age18to25.toFloat(),
+                "18到25岁"
+            )
+        )
+        entries.add(
+            PieEntry(
+                mViewModel.getAgeData().age26to30.toFloat(),
+                "26到30岁"
+            )
+        )
+        entries.add(
+            PieEntry(
+                mViewModel.getAgeData().age31to35.toFloat(),
+                "31到35岁"
+            )
+        )
+        entries.add(
+            PieEntry(
+                mViewModel.getAgeData().age35to.toFloat(),
+                "35岁以上"
+            )
+        )
+        chart.centerText = "年龄"
+        val dataSet = PieDataSet(entries, "年龄")
+        setCharData(dataSet, chart)
+    }
+
+    fun setExpData(chart : PieChart){
+        val entries = ArrayList<PieEntry>()
+        entries.add(
+            PieEntry(
+                mViewModel.getExpData().exp0.toFloat(),
+                "0年"
+            )
+        )
+        entries.add(
+            PieEntry(
+                mViewModel.getExpData().exp1to3.toFloat(),
+                "1-3年"
+            )
+        )
+        entries.add(
+            PieEntry(
+                mViewModel.getExpData().exp3to5.toFloat(),
+                "3-5年"
+            )
+        )
+        entries.add(
+            PieEntry(
+                mViewModel.getExpData().exp5to.toFloat(),
+                "5年以上"
+            )
+        )
+        chart.centerText = "工作经验"
+        val dataSet = PieDataSet(entries, "工作经验")
+        setCharData(dataSet, chart)
+    }
+    /**
+      * @description 设置圆饼的属性
+      * @param 
+      * @return 
+      */
+    private fun setCharData(dataSet : PieDataSet, chart : PieChart){
+        dataSet.sliceSpace = 3f
+        dataSet.selectionShift = 5f
+        dataSet.colors = getColors()
+        dataSet.valueLinePart1OffsetPercentage = 80f
+        dataSet.valueLinePart1Length = 0.2f
+        dataSet.valueLinePart2Length = 0.4f
+
+        dataSet.yValuePosition = PieDataSet.ValuePosition.OUTSIDE_SLICE
+        val data = PieData(dataSet)
+        data.setValueFormatter(PercentFormatter())
+        data.setValueTextSize(11f)
+        data.setValueTextColor(Color.BLACK)
+        chart.data = data
+
+        chart.highlightValues(null)
+        chart.invalidate()
+
+    }
+
+
+
+    /**
+     * 得到颜色数组
+     */
+    private fun getColors() : ArrayList<Int>{
+
+        // 为饼图加颜色
+        val colors = java.util.ArrayList<Int>()
+
+        for (c in ColorTemplate.VORDIPLOM_COLORS) colors.add(c)
+
+        for (c in ColorTemplate.JOYFUL_COLORS) colors.add(c)
+
+        for (c in ColorTemplate.COLORFUL_COLORS) colors.add(c)
+
+        for (c in ColorTemplate.LIBERTY_COLORS) colors.add(c)
+
+        for (c in ColorTemplate.PASTEL_COLORS) colors.add(c)
+
+        colors.add(ColorTemplate.getHoloBlue())
+        return colors
+    }
+
 }

@@ -5,6 +5,10 @@ import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import com.example.resume.R
+import com.example.resume.base.BaseActivity
+import com.example.resume.databinding.ActivityHomeBinding
+import com.example.resume.ui.fragment.viewmodel.ListViewModel
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment

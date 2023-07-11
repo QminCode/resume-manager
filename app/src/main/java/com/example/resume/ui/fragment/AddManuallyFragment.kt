@@ -3,7 +3,7 @@ package com.example.resume.ui.fragment
 import android.os.Bundle
 import com.example.resume.base.BaseFragment
 import com.example.resume.databinding.FragmentAddBinding
-import com.example.resume.ui.viewmodel.AddViewModel
+import com.example.resume.ui.fragment.viewmodel.AddViewModel
 
 
 class AddManuallyFragment : BaseFragment<AddViewModel, FragmentAddBinding>() {
