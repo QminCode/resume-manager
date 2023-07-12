@@ -15,6 +15,13 @@
         android:background="@color/white"
         app:titleTextColor="@color/blue"
         android:outlineAmbientShadowColor="@color/white"/>
+
+    <org.angmarch.views.NiceSpinner
+        android:id="@+id/spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp" />
+
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="match_parent"

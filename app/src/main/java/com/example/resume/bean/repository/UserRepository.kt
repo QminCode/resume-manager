@@ -17,11 +17,39 @@ import rxhttp.wrapper.param.RxHttp
  * @version:
  */
 object UserRepository {
+
     /**
      *获取列表信息
      */
     fun getList(): Await<List<Applicant>>{
-        return RxHttp.get(NetUrl.BASE_URL+NetUrl.SIMILARITY_URL).toAwait()
+        return RxHttp.get(NetUrl.BASE_URL+NetUrl.LIST_URL).toAwait()
+    }
+
+    /**
+     * 排序
+     */
+    fun sortAge1(): Await<List<Applicant>>{
+        return RxHttp.get(NetUrl.BASE_URL+ NetUrl.SORT_AGE1_URL).toAwait()
+    }
+
+    fun sortAge2(): Await<List<Applicant>>{
+        return RxHttp.get(NetUrl.BASE_URL+ NetUrl.SORT_AGE2_URL).toAwait()
+    }
+
+    fun sortExp1(): Await<List<Applicant>>{
+        return RxHttp.get(NetUrl.BASE_URL+ NetUrl.SORT_EXP1_URL).toAwait()
+    }
+
+    fun sortExp2(): Await<List<Applicant>>{
+        return RxHttp.get(NetUrl.BASE_URL+ NetUrl.SORT_EXP2_URL).toAwait()
+    }
+
+    fun sortEdu1(): Await<List<Applicant>>{
+        return RxHttp.get(NetUrl.BASE_URL+ NetUrl.SORT_EDU1_URL).toAwait()
+    }
+
+    fun sortEdu2(): Await<List<Applicant>>{
+        return RxHttp.get(NetUrl.BASE_URL+ NetUrl.SORT_EDU2_URL).toAwait()
     }
 
     /**

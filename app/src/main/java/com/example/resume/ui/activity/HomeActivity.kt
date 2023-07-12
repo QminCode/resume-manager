@@ -1,13 +1,15 @@
 package com.example.resume.ui.activity
 
 import android.os.Bundle
+import com.example.resume.R
+import com.example.resume.base.BaseActivity
+import com.example.resume.databinding.ActivityHomeBinding
 import com.example.resume.ui.fragment.viewmodel.ListViewModel
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.example.resume.ui.fragment.StatisticsFragment
 import com.example.resume.ui.fragment.TalentProfileFragment
-
 
 
 /**
@@ -19,10 +21,6 @@ import com.example.resume.ui.fragment.TalentProfileFragment
 class HomeActivity: BaseActivity<ListViewModel, ActivityHomeBinding>() {
 
     override fun initView(savedInstanceState: Bundle?) {
-       // val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
-        //val navController=findNavController(R.id.nav_host_fragment)
-        //mBind.bottomNavigationView.setupWithNavController(navController)
-       // NavigationUI.setupWithNavController(mBind.bottomNavigationView,navController)
         mBind.viewPager2.initMain(this)
         mBind.bottomNavigationView.setOnItemSelectedListener{
             when(it.itemId){
@@ -46,7 +44,7 @@ class HomeActivity: BaseActivity<ListViewModel, ActivityHomeBinding>() {
      * 错误界面 空界面 点击重试触发的方法
      */
     override fun onLoadRetry() {
-        mViewModel.getList( loadingXml = true)
+        mViewModel.getList(loadingXml = false)
     }
 
 

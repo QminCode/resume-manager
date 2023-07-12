@@ -2,11 +2,11 @@
     <!-- Base application theme. -->
     <style name="Theme.Resume" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">#03A9F4</item>
-        <item name="colorPrimaryVariant">#03A9F4</item>
+        <item name="colorPrimary">@color/blue</item>
+        <item name="colorPrimaryVariant">@color/white</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+        <item name="android:statusBarColor">@color/white</item>
         <!-- Customize your theme here. -->
         <!-- 窗口背景颜色 -->
         <item name="android:windowBackground">@color/white</item>

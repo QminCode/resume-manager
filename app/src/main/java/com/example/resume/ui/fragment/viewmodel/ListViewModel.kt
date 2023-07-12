@@ -21,7 +21,6 @@ class ListViewModel : BaseViewModel(){
 //    var listData = MutableLiveData<Applicant>()
     var listData = MutableLiveData<List<Applicant>>()
 
-
     /**
      * 获取首页列表信息
      */
@@ -32,6 +31,57 @@ class ListViewModel : BaseViewModel(){
                 listData.value = UserRepository.getList().await()
             }
             requestCode = NetUrl.SIMILARITY_URL
+        }
+    }
+
+    /**
+     * 排序,获取排序后的结果
+     */
+    fun sortAge1() {
+        rxHttpRequest {
+            onRequest = {
+                listData.value = UserRepository.sortAge1().await()
+            }
+        }
+    }
+
+    fun sortAge2() {
+        rxHttpRequest {
+            onRequest = {
+                listData.value = UserRepository.sortAge2().await()
+            }
+        }
+    }
+
+    fun sortExp1() {
+        rxHttpRequest {
+            onRequest = {
+                listData.value = UserRepository.sortExp1().await()
+            }
+        }
+    }
+
+    fun sortExp2() {
+        rxHttpRequest {
+            onRequest = {
+                listData.value = UserRepository.sortExp1().await()
+            }
+        }
+    }
+
+    fun sortEdu1() {
+        rxHttpRequest {
+            onRequest = {
+                listData.value = UserRepository.sortEdu1().await()
+            }
+        }
+    }
+
+    fun sortEdu2() {
+        rxHttpRequest {
+            onRequest = {
+                listData.value = UserRepository.sortEdu2().await()
+            }
         }
     }
 

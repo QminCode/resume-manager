@@ -29,6 +29,6 @@ data class Applicant(
     val key_info: String,
     val name: String,
     val position: String,
-    val similarity: Double,
+//    val similarity: Double,
     val working_years: Int
 )

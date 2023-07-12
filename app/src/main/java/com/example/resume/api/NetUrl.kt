@@ -13,8 +13,26 @@ object NetUrl {
 
     const val BASE_URL = "http://shuzhirecruit.nat300.top/"
 
+    //年龄升排序
+    const val SORT_AGE1_URL = "sort/age/ASC"
+
+    //年龄降排序
+    const val SORT_AGE2_URL = "sort/age/DESC"
+
+    //经验升排序
+    const val SORT_EXP1_URL = "sort/work_years/ASC"
+
+    //经验降排序
+    const val SORT_EXP2_URL = "sort/work_years/DESC"
+
+    //学历升排序
+    const val SORT_EDU1_URL = "sort/edu_level/ASC"
+
+    //学历降排序
+    const val SORT_EDU2_URL = "sort/edu_level/DESC"
+
     //简历列表
-//    const val LIST_URL = ""
+    const val LIST_URL = "display"
     //人岗匹配
     const val SIMILARITY_URL = "similarity_v2/str"
 

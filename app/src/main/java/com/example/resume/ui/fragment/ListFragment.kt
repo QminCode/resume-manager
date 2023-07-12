@@ -7,12 +7,9 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.findNavController
-import androidx.navigation.ui.onNavDestinationSelected
 import com.example.mvvm.ext.divider
 import com.example.mvvm.ext.getColorExt
 import com.example.mvvm.ext.grid
-import com.example.mvvm.ext.loadListSuccess
 import com.example.mvvm.ext.loadMore
 import com.example.mvvm.ext.logD
 import com.example.mvvm.ext.logV
@@ -29,12 +26,14 @@ import com.example.resume.ui.fragment.viewmodel.ListViewModel
 import com.kennyc.bottomsheet.BottomSheetListener
 import com.kennyc.bottomsheet.BottomSheetMenuDialogFragment
 import kotlinx.coroutines.launch
-import rxhttp.toAwait
+import org.angmarch.views.OnSpinnerItemSelectedListener
 import rxhttp.toFlow
 import rxhttp.wrapper.param.RxHttp
 import java.io.FileOutputStream
 import java.io.InputStream
 import java.io.OutputStream
+import java.util.Arrays
+import java.util.LinkedList
 
 
 /**
@@ -66,6 +65,21 @@ class ListFragment : BottomSheetListener, BaseFragment<ListViewModel, FragmentLi
                 false
             }
         }
+
+        //下拉选择
+        val spinner = mBind.spinner
+        val dataset: List<String> = LinkedList(listOf("默认排序", "年龄排序(升序)", "年龄排序(降序)",
+            "工作经验排序(升序)", "工作经验排序(降序)", "学历排序(升序)", "学历排序(降序)"))
+        spinner.attachDataSource(dataset)
+        var spinnerListener = OnSpinnerItemSelectedListener { parent, view, position, id ->
+            val item = parent.selectedItem
+//            item.toast()
+            initSort(item.toString())
+        }
+        spinner.onSpinnerItemSelectedListener = spinnerListener
+
+
+
         mBind.listSmartRefresh.refresh {
             //下拉刷新
             mViewModel.getList(false)
@@ -169,5 +183,14 @@ class ListFragment : BottomSheetListener, BaseFragment<ListViewModel, FragmentLi
     override fun onSheetShown(bottomSheet: BottomSheetMenuDialogFragment, `object`: Any?) {
         "onSheetShown with Object ".logV()
     }
-
+    private fun initSort(item: String){
+        when(item){
+            "年龄排序(升序)" -> mViewModel.sortAge1()
+            "年龄排序(降序)" -> mViewModel.sortAge2()
+            "工作经验排序(升序)" -> mViewModel.sortExp1()
+            "工作经验排序(降序)" -> mViewModel.sortExp2()
+            "学历排序(升序)" -> mViewModel.sortEdu1()
+            "学历排序(降序)" -> mViewModel.sortEdu2()
+        }
+    }
 }
