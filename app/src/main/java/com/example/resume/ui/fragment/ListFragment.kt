@@ -17,11 +17,13 @@ import com.example.mvvm.ext.loadMore
 import com.example.mvvm.ext.logD
 import com.example.mvvm.ext.logV
 import com.example.mvvm.ext.refresh
+import com.example.mvvm.ext.toStartActivity
 import com.example.mvvm.ext.toast
 import com.example.mvvm.util.decoration.DividerOrientation
 import com.example.resume.R
 import com.example.resume.base.BaseFragment
 import com.example.resume.databinding.FragmentListBinding
+import com.example.resume.ui.activity.AddManuallyFragment
 import com.example.resume.ui.adapter.ListAdapter
 import com.example.resume.ui.fragment.viewmodel.ListViewModel
 import com.kennyc.bottomsheet.BottomSheetListener
@@ -124,7 +126,7 @@ class ListFragment : BottomSheetListener, BaseFragment<ListViewModel, FragmentLi
             }
 
             //在menuitem中使用Navigation，此时menu的id要与nav中的fragment的id一致
-            R.id.addManuallyFragment -> item.onNavDestinationSelected(findNavController())
+            R.id.addManuallyFragment -> toStartActivity(AddManuallyFragment::class.java)
         }
     }
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
