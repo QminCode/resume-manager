@@ -7,17 +7,28 @@ import androidx.room.PrimaryKey
 /**
  * @author: playboi_YzY
  * @date: 2023/5/24 10:28
- * @description: 应聘者类，使用 Room 实体定义数据
+ * @description: 应聘者类
  * @version:
  */
 
-@Entity
 data class Applicant(
-    @PrimaryKey(autoGenerate = true) val id: Int,
-
-    @ColumnInfo(name = "name") val name: String?,
-    @ColumnInfo(name = "age") val age: Int?,
-    @ColumnInfo(name = "academic_qualifications") val aq: String?,
-    @ColumnInfo(name = "college") val college: String?,
-    @ColumnInfo(name = "experience") val exp: Int?
+//    var name: String,
+//    var age: String,
+//    var highest_education_level: String,
+//    var graduated_school: String,
+//    var working_years: String,
+//    var position: String,
+//    var key_info: String,
+//    var similarity: String,
+//    var undergraduate: String,
+//    var master: String,
+//    var doctor: String
+    val age: Int,
+    val graduated_school: String,
+    val highest_education_level: String,
+    val key_info: String,
+    val name: String,
+    val position: String,
+    val similarity: Double,
+    val working_years: Int
 )

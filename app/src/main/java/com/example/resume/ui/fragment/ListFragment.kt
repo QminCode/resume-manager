@@ -28,7 +28,6 @@ import com.example.resume.ui.adapter.ListAdapter
 import com.example.resume.ui.fragment.viewmodel.ListViewModel
 import com.kennyc.bottomsheet.BottomSheetListener
 import com.kennyc.bottomsheet.BottomSheetMenuDialogFragment
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import rxhttp.toAwait
 import rxhttp.toFlow
@@ -67,13 +66,13 @@ class ListFragment : BottomSheetListener, BaseFragment<ListViewModel, FragmentLi
                 false
             }
         }
-        mBind.listSmartRefresh.refresh {
-            //下拉刷新
-            mViewModel.getList(true)
-        }.loadMore{
-            //上拉加载
-            mViewModel.getList(false)
-        }
+//        mBind.listSmartRefresh.refresh {
+//            //下拉刷新
+//            mViewModel.getList(true)
+//        }.loadMore{
+//            //上拉加载
+//            mViewModel.getList(false)
+//        }
         //初始化 recycleView
         mBind.listRecyclerView.grid(1).divider {
             orientation = DividerOrientation.HORIZONTAL
@@ -97,7 +96,7 @@ class ListFragment : BottomSheetListener, BaseFragment<ListViewModel, FragmentLi
     override fun onRequestSuccess() {
         mViewModel.listData.observe(this, Observer {
             //请求到列表数据
-            listAdapter.loadListSuccess(it,mBind.listSmartRefresh)
+            listAdapter.setList(it)
         })
     }
 

@@ -1,30 +1,13 @@
 package com.example.resume.ui.activity
 
-import android.R.attr
-import android.app.Activity
-import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import com.example.resume.ui.fragment.viewmodel.ListViewModel
-import android.view.MenuItem
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.ListFragment
-import androidx.navigation.findNavController
-import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.NavigationUI
-import androidx.navigation.ui.onNavDestinationSelected
-import androidx.navigation.ui.setupWithNavController
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
-import com.example.mvvm.ext.logV
-import com.example.resume.R
-import com.example.resume.base.BaseActivity
-import com.example.resume.databinding.ActivityHomeBinding
 import com.example.resume.ui.fragment.StatisticsFragment
 import com.example.resume.ui.fragment.TalentProfileFragment
-import com.kennyc.bottomsheet.BottomSheetListener
-import com.kennyc.bottomsheet.BottomSheetMenuDialogFragment
+
 
 
 /**

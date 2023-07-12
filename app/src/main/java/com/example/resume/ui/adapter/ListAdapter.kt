@@ -16,9 +16,9 @@ class ListAdapter : BaseQuickAdapter<Applicant, BaseViewHolder>(R.layout.item_li
     override fun convert(holder: BaseViewHolder, item: Applicant) {
         holder.setText(R.id.text_name,item.name)
         holder.setText(R.id.text_age,item.age.toString())
-        holder.setText(R.id.text_academic,item.college)
-        holder.setText(R.id.text_qualifications,item.aq)
-        holder.setText(R.id.text_experience,item.exp.toString())
+        holder.setText(R.id.text_academic,item.graduated_school)
+        holder.setText(R.id.text_qualifications,item.highest_education_level)
+        holder.setText(R.id.text_experience,item.working_years.toString())
     }
 
 }
