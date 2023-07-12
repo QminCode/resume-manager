@@ -23,7 +23,7 @@ import com.example.resume.R
 import com.example.resume.base.BaseFragment
 import com.example.resume.databinding.FragmentListBinding
 import com.example.resume.ui.adapter.ListAdapter
-import com.example.resume.ui.viewmodel.ListViewModel
+import com.example.resume.ui.fragment.viewmodel.ListViewModel
 import com.kennyc.bottomsheet.BottomSheetListener
 import com.kennyc.bottomsheet.BottomSheetMenuDialogFragment
 import kotlinx.coroutines.flow.collect
@@ -114,12 +114,15 @@ class ListFragment : BottomSheetListener, BaseFragment<ListViewModel, FragmentLi
         `object`: Any?
     ) {
         when(item.itemId) {
+
+
             R.id.add_byFile -> {
                 val intent = Intent(Intent.ACTION_OPEN_DOCUMENT)
                 intent.type = "*/*" // 可选：指定所需的MIME类型，例如 "image/*"（图片）或 "application/pdf"（PDF）
                 intent.addCategory(Intent.CATEGORY_OPENABLE)
                 startActivityForResult(intent,1)
             }
+
             //在menuitem中使用Navigation，此时menu的id要与nav中的fragment的id一致
             R.id.addManuallyFragment -> item.onNavDestinationSelected(findNavController())
         }
