@@ -21,6 +21,7 @@ import com.scwang.smart.refresh.layout.SmartRefreshLayout
 fun SmartRefreshLayout.refresh(refreshAction: () -> Unit = {}): SmartRefreshLayout {
     this.setOnRefreshListener {
         refreshAction.invoke()
+        it.finishRefresh(2000/*,false*/)
     }
     return this
 }
@@ -33,6 +34,7 @@ fun SmartRefreshLayout.refresh(refreshAction: () -> Unit = {}): SmartRefreshLayo
 fun SmartRefreshLayout.loadMore(loadMoreAction: () -> Unit = {}): SmartRefreshLayout {
     this.setOnLoadMoreListener {
         loadMoreAction.invoke()
+        it.finishLoadMore(2000/*,false*/)
     }
     return this
 }

@@ -48,7 +48,7 @@ class HomeActivity: BaseActivity<ListViewModel, ActivityHomeBinding>() {
      * 错误界面 空界面 点击重试触发的方法
      */
     override fun onLoadRetry() {
-        mViewModel.getList(isRefresh = true, loadingXml = true)
+        mViewModel.getList( loadingXml = true)
     }
 
 

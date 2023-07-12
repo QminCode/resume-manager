@@ -25,14 +25,13 @@ class ListViewModel : BaseViewModel(){
     /**
      * 获取首页列表信息
      */
-    fun getList(isRefresh: Boolean, loadingXml: Boolean = false) {
+    fun getList(loadingXml: Boolean = false) {
 //        listData.value = UserRepository.getList().await()
         rxHttpRequest {
             onRequest = {
                 listData.value = UserRepository.getList().await()
             }
             requestCode = NetUrl.SIMILARITY_URL
-            isRefreshRequest = isRefresh
         }
     }
 

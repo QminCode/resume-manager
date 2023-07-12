@@ -64,13 +64,14 @@ class ListFragment : BottomSheetListener, BaseFragment<ListViewModel, FragmentLi
                 false
             }
         }
-//        mBind.listSmartRefresh.refresh {
-//            //下拉刷新
-//            mViewModel.getList(true)
-//        }.loadMore{
-//            //上拉加载
-//            mViewModel.getList(false)
-//        }
+        mBind.listSmartRefresh.refresh {
+            //下拉刷新
+            mViewModel.getList(false)
+
+        }.loadMore{
+            //上拉加载
+            mViewModel.getList(false)
+        }
         //初始化 recycleView
         mBind.listRecyclerView.grid(1).divider {
             orientation = DividerOrientation.HORIZONTAL
@@ -85,7 +86,7 @@ class ListFragment : BottomSheetListener, BaseFragment<ListViewModel, FragmentLi
      * 错误界面 空界面 点击重试触发的方法
      */
     override fun onLoadRetry() {
-        mViewModel.getList(isRefresh = true, loadingXml = true)
+        mViewModel.getList( loadingXml = false)
     }
 
     /**
