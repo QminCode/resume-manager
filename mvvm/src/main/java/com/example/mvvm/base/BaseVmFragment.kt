@@ -1,5 +1,4 @@
 package com.example.mvvm.base
-
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater

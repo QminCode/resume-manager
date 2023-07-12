@@ -12,8 +12,8 @@
         android:layout_height="wrap_content"
         app:menu="@menu/toolbar_menu"
         app:title="@string/app_name"
-        android:background="@color/blue"
-        app:titleTextColor="@color/white"
+        android:background="@color/white"
+        app:titleTextColor="@color/blue"
         android:outlineAmbientShadowColor="@color/white"/>
     <ImageView
         android:id="@+id/imageView"

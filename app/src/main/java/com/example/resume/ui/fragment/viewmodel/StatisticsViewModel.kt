@@ -1,5 +1,6 @@
 package com.example.resume.ui.fragment.viewmodel
 
+import androidx.lifecycle.MutableLiveData
 import com.example.mvvm.base.BaseViewModel
 import com.example.resume.bean.Age
 import com.example.resume.bean.Edu
@@ -12,6 +13,10 @@ import com.example.resume.bean.Exp
  * @version:
  */
 class StatisticsViewModel : BaseViewModel(){
+
+    var EduData = MutableLiveData<Edu>()
+    var AgeData = MutableLiveData<Age>()
+    var ExpData = MutableLiveData<Exp>()
 
     fun getEduData():Edu{
         return Edu(30,20,45)
