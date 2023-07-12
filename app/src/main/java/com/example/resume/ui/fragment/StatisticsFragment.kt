@@ -3,6 +3,7 @@ package com.example.resume.ui.fragment
 import android.graphics.Color
 import android.os.Bundle
 import com.example.resume.base.BaseFragment
+import com.example.resume.bean.Edu
 import com.example.resume.databinding.FragmentStatisticsBinding
 import com.example.resume.ui.fragment.viewmodel.StatisticsViewModel
 import com.github.mikephil.charting.animation.Easing
@@ -30,6 +31,9 @@ class StatisticsFragment : OnChartValueSelectedListener,BaseFragment<StatisticsV
         initChart(eduChart)
         initChart(ageChart)
         initChart(expChart)
+        mViewModel.getAgeData()
+        mViewModel.getEduData()
+        mViewModel.getExpData()
         setEduData(eduChart)
         setAgeData(ageChart)
         setExpData(expChart)
@@ -49,7 +53,6 @@ class StatisticsFragment : OnChartValueSelectedListener,BaseFragment<StatisticsV
       * @return
       */
     private fun initChart(eduChart : PieChart){
-        eduChart.setUsePercentValues(true)
         eduChart.description.isEnabled = false
         eduChart.setExtraOffsets(5f, 10f, 5f, 5f)
         eduChart.dragDecelerationFrictionCoef = 0.95f
@@ -61,7 +64,7 @@ class StatisticsFragment : OnChartValueSelectedListener,BaseFragment<StatisticsV
         eduChart.setTransparentCircleColor(Color.WHITE)
         eduChart.setTransparentCircleAlpha(110)
 
-        eduChart.holeRadius = 58f
+        eduChart.holeRadius = 40f
         eduChart.transparentCircleRadius = 61f
 
         eduChart.setDrawCenterText(true)
@@ -88,89 +91,97 @@ class StatisticsFragment : OnChartValueSelectedListener,BaseFragment<StatisticsV
 
         // NOTE: The order of the entries when being added to the entries array determines their position around the center of
         // the chart.
-        entries.add(
-            PieEntry(
-                mViewModel.getEduData().PhD.toFloat(),
-                "博士"
+        mViewModel.EduData.observe(this, {
+            entries.add(
+                PieEntry(
+                    it.PhD.toFloat(),
+                    "博士"
+                )
             )
-        )
-        entries.add(
-            PieEntry(
-                mViewModel.getEduData().master.toFloat(),
-                "硕士"
+            entries.add(
+                PieEntry(
+                    it.master.toFloat(),
+                    "硕士"
+                )
             )
-        )
-        entries.add(
-            PieEntry(
-                mViewModel.getEduData().undergraduate.toFloat(),
-                "本科"
+            entries.add(
+                PieEntry(
+                    it.undergraduate.toFloat(),
+                    "本科"
+                )
             )
-        )
-        chart.centerText = "学历"
-        val dataSet = PieDataSet(entries, "学历")
-        setCharData(dataSet, chart)
+            chart.centerText = "学历"
+            val dataSet = PieDataSet(entries, "学历")
+            setCharData(dataSet, chart)
+        })
     }
 
     private fun setAgeData(chart : PieChart){
         val entries = ArrayList<PieEntry>()
-        entries.add(
-            PieEntry(
-                mViewModel.getAgeData().age18to25.toFloat(),
-                "18到25岁"
+        mViewModel.AgeData.observe(this,{
+            entries.add(
+                PieEntry(
+                    it.age18to25.toFloat(),
+                    "18到25岁"
+                )
             )
-        )
-        entries.add(
-            PieEntry(
-                mViewModel.getAgeData().age26to30.toFloat(),
-                "26到30岁"
+            entries.add(
+                PieEntry(
+                    it.age26to30.toFloat(),
+                    "26到30岁"
+                )
             )
-        )
-        entries.add(
-            PieEntry(
-                mViewModel.getAgeData().age31to35.toFloat(),
-                "31到35岁"
+            entries.add(
+                PieEntry(
+                    it.age31to35.toFloat(),
+                    "31到35岁"
+                )
             )
-        )
-        entries.add(
-            PieEntry(
-                mViewModel.getAgeData().age35to.toFloat(),
-                "35岁以上"
+            entries.add(
+                PieEntry(
+                    it.age35to.toFloat(),
+                    "35岁以上"
+                )
             )
-        )
-        chart.centerText = "年龄"
-        val dataSet = PieDataSet(entries, "年龄")
-        setCharData(dataSet, chart)
+            chart.centerText = "年龄"
+            val dataSet = PieDataSet(entries, "年龄")
+            setCharData(dataSet, chart)
+        })
+
     }
 
     fun setExpData(chart : PieChart){
         val entries = ArrayList<PieEntry>()
-        entries.add(
-            PieEntry(
-                mViewModel.getExpData().exp0.toFloat(),
-                "0年"
+        mViewModel.ExpData.observe(this,{
+            entries.add(
+                PieEntry(
+                    it.exp0.toFloat(),
+                    "0年"
+                )
             )
-        )
-        entries.add(
-            PieEntry(
-                mViewModel.getExpData().exp1to3.toFloat(),
-                "1-3年"
+            entries.add(
+                PieEntry(
+                    it.exp1to3.toFloat(),
+                    "1-3年"
+                )
             )
-        )
-        entries.add(
-            PieEntry(
-                mViewModel.getExpData().exp3to5.toFloat(),
-                "3-5年"
+            entries.add(
+                PieEntry(
+                    it.exp3to5.toFloat(),
+                    "3-5年"
+                )
             )
-        )
-        entries.add(
-            PieEntry(
-                mViewModel.getExpData().exp5to.toFloat(),
-                "5年以上"
+            entries.add(
+                PieEntry(
+                   it.exp5to.toFloat(),
+                    "5年以上"
+                )
             )
-        )
-        chart.centerText = "工作经验"
-        val dataSet = PieDataSet(entries, "工作经验")
-        setCharData(dataSet, chart)
+            chart.centerText = "工作经验"
+            val dataSet = PieDataSet(entries, "工作经验")
+            setCharData(dataSet, chart)
+        })
+
     }
     /**
       * @description 设置圆饼的属性
@@ -188,7 +199,7 @@ class StatisticsFragment : OnChartValueSelectedListener,BaseFragment<StatisticsV
         dataSet.yValuePosition = PieDataSet.ValuePosition.OUTSIDE_SLICE
         val data = PieData(dataSet)
         data.setValueFormatter(PercentFormatter())
-        data.setValueTextSize(11f)
+        data.setValueTextSize(15f)
         data.setValueTextColor(Color.BLACK)
         chart.data = data
 
@@ -220,5 +231,6 @@ class StatisticsFragment : OnChartValueSelectedListener,BaseFragment<StatisticsV
         colors.add(ColorTemplate.getHoloBlue())
         return colors
     }
+
 
 }

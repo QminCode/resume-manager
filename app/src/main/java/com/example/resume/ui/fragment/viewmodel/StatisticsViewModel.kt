@@ -18,13 +18,13 @@ class StatisticsViewModel : BaseViewModel(){
     var AgeData = MutableLiveData<Age>()
     var ExpData = MutableLiveData<Exp>()
 
-    fun getEduData():Edu{
-        return Edu(30,20,45)
+    fun getEduData(){
+        EduData.value = Edu(30,20,45)
     }
-    fun getAgeData(): Age {
-        return Age(22,41,30,5)
+    fun getAgeData(){
+        AgeData.value = Age(22,41,30,5)
     }
-    fun getExpData() : Exp{
-        return Exp(10,20,30,2)
+    fun getExpData(){
+        ExpData.value = Exp(50,20,10,10)
     }
 }
