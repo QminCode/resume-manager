@@ -16,6 +16,9 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        vectorDrawables {
+            useSupportLibrary true
+        }
     }
 
     buildTypes {
@@ -41,6 +44,11 @@ android {
         kotlinCompilerExtensionVersion = "1.4.1"
         //compose 与 kotlin的版本兼容 https://developer.android.google.cn/jetpack/androidx/releases/compose-kotlin?hl=zh-cn
     }
+    packagingOptions {
+        resources {
+            excludes += '/META-INF/{AL2.0,LGPL2.1}'
+        }
+    }
 
 }
 
@@ -56,7 +64,11 @@ dependencies {
     implementation "androidx.compose.runtime:runtime:1.2.0"
     implementation "androidx.compose.ui:ui-tooling-preview:1.2.0"
     implementation 'androidx.core:core:1.7.0'
+    implementation platform('androidx.compose:compose-bom:2022.10.00')
+    implementation 'androidx.compose.ui:ui-graphics'
+    implementation 'androidx.compose.material3:material3'
     androidTestImplementation "androidx.compose.ui:ui-test-junit4:1.2.0"
+    androidTestImplementation platform('androidx.compose:compose-bom:2022.10.00')
     debugImplementation "androidx.compose.ui:ui-tooling:1.2.0"
     debugImplementation "androidx.compose.ui:ui-test-manifest:1.2.0"
 

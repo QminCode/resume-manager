@@ -1,15 +1,13 @@
 package com.example.resume.ui.activity
 
 import android.os.Bundle
-import com.example.resume.R
-import com.example.resume.base.BaseActivity
-import com.example.resume.databinding.ActivityHomeBinding
 import com.example.resume.ui.fragment.viewmodel.ListViewModel
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.example.resume.ui.fragment.StatisticsFragment
 import com.example.resume.ui.fragment.TalentProfileFragment
+
 
 
 /**
