@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
+
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:name=".App"
@@ -12,15 +13,23 @@
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:networkSecurityConfig="@xml/network_config"
         android:supportsRtl="true"
         android:theme="@style/Theme.Resume"
-        tools:targetApi="33"
-        android:networkSecurityConfig="@xml/network_config">
+        tools:targetApi="33">
+        <activity
+            android:name=".ui.activity.AddManuallyFragment"
+            android:exported="true"
+            android:label="@string/title_activity_add_manually_fragment"
+            android:theme="@style/Theme.Resume" >
+
+
+        </activity>
         <activity
             android:name=".ui.activity.HomeActivity"
-            android:theme="@style/Theme.Resume"
             android:exported="true"
-            android:screenOrientation="fullSensor">
+            android:screenOrientation="fullSensor"
+            android:theme="@style/Theme.Resume">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
