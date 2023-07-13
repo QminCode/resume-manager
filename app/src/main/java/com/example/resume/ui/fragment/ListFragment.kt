@@ -18,9 +18,11 @@ import com.example.mvvm.ext.toStartActivity
 import com.example.mvvm.ext.toast
 import com.example.mvvm.util.decoration.DividerOrientation
 import com.example.resume.R
+import com.example.resume.api.NetUrl
 import com.example.resume.base.BaseFragment
 import com.example.resume.databinding.FragmentListBinding
 import com.example.resume.ui.activity.AddManuallyFragment
+import com.example.resume.ui.activity.ImageActivity
 import com.example.resume.ui.adapter.ListAdapter
 import com.example.resume.ui.fragment.viewmodel.ListViewModel
 import com.kennyc.bottomsheet.BottomSheetListener
@@ -78,7 +80,13 @@ class ListFragment : BottomSheetListener, BaseFragment<ListViewModel, FragmentLi
         }
         spinner.onSpinnerItemSelectedListener = spinnerListener
 
-
+        listAdapter.run {
+            setOnItemClickListener{ adapter, view, position ->
+                var bundle = Bundle()
+                bundle.putString("image",NetUrl.TEST_URL)
+                toStartActivity(ImageActivity::class.java,  bundle)
+            }
+        }
 
         mBind.listSmartRefresh.refresh {
             //下拉刷新

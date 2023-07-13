@@ -18,13 +18,13 @@
         android:theme="@style/Theme.Resume"
         tools:targetApi="33">
         <activity
+            android:name=".ui.activity.ImageActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.activity.AddManuallyFragment"
             android:exported="true"
             android:label="@string/title_activity_add_manually_fragment"
-            android:theme="@style/Theme.Resume" >
-
-
-        </activity>
+            android:theme="@style/Theme.Resume"></activity>
         <activity
             android:name=".ui.activity.HomeActivity"
             android:exported="true"

@@ -9,7 +9,7 @@
         android:id="@+id/state_error_img"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:src="@drawable/ic_base_error"
+        android:src="@drawable/erro"
         app:layout_constraintBottom_toTopOf="@+id/state_error_tip"
         app:layout_constraintDimensionRatio="w,30:37"
         app:layout_constraintLeft_toLeftOf="parent"

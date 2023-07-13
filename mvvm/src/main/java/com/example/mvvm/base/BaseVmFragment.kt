@@ -189,6 +189,7 @@ abstract class BaseVmFragment<VM : com.example.mvvm.base.BaseViewModel> : Fragme
                 if (it.loadingType == LoadingType.LOADING_XML) {
                     showErrorUi(it.errorMessage)
                 }
+                showErrorUi(it.errorMessage)
                 onRequestError(it)
             }
             //如果是 LoadingType.LOADING_XML，当请求成功时 会显示正常的成功布局

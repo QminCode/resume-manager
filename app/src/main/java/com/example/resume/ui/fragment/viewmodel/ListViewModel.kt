@@ -31,6 +31,7 @@ class ListViewModel : BaseViewModel(){
                 listData.value = UserRepository.getList().await()
             }
             requestCode = NetUrl.SIMILARITY_URL
+
         }
     }
 

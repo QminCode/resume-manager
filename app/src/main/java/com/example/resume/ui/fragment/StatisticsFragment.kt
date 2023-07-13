@@ -2,6 +2,7 @@ package com.example.resume.ui.fragment
 
 import android.graphics.Color
 import android.os.Bundle
+import com.example.mvvm.ext.toast
 import com.example.resume.base.BaseFragment
 import com.example.resume.bean.Edu
 import com.example.resume.databinding.FragmentStatisticsBinding
@@ -17,6 +18,7 @@ import com.github.mikephil.charting.formatter.PercentFormatter
 import com.github.mikephil.charting.highlight.Highlight
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener
 import com.github.mikephil.charting.utils.ColorTemplate
+import kotlin.enums.EnumEntries
 
 
 /**
@@ -87,11 +89,11 @@ class StatisticsFragment : OnChartValueSelectedListener,BaseFragment<StatisticsV
     }
 
     private fun setEduData(chart : PieChart){
-        val entries = ArrayList<PieEntry>()
 
         // NOTE: The order of the entries when being added to the entries array determines their position around the center of
         // the chart.
-        mViewModel.EduData.observe(this, {
+        mViewModel.EduData.observe(this) {
+            val entries = ArrayList<PieEntry>()
             entries.add(
                 PieEntry(
                     it.PhD.toFloat(),
@@ -113,12 +115,12 @@ class StatisticsFragment : OnChartValueSelectedListener,BaseFragment<StatisticsV
             chart.centerText = "学历"
             val dataSet = PieDataSet(entries, "学历")
             setCharData(dataSet, chart)
-        })
+        }
     }
 
     private fun setAgeData(chart : PieChart){
-        val entries = ArrayList<PieEntry>()
-        mViewModel.AgeData.observe(this,{
+        mViewModel.AgeData.observe(this) {
+            val entries = ArrayList<PieEntry>()
             entries.add(
                 PieEntry(
                     it.age18to25.toFloat(),
@@ -146,13 +148,12 @@ class StatisticsFragment : OnChartValueSelectedListener,BaseFragment<StatisticsV
             chart.centerText = "年龄"
             val dataSet = PieDataSet(entries, "年龄")
             setCharData(dataSet, chart)
-        })
-
+        }
     }
 
     fun setExpData(chart : PieChart){
-        val entries = ArrayList<PieEntry>()
-        mViewModel.ExpData.observe(this,{
+        mViewModel.ExpData.observe(this) {
+            val entries = ArrayList<PieEntry>()
             entries.add(
                 PieEntry(
                     it.exp0.toFloat(),
@@ -173,14 +174,15 @@ class StatisticsFragment : OnChartValueSelectedListener,BaseFragment<StatisticsV
             )
             entries.add(
                 PieEntry(
-                   it.exp5to.toFloat(),
+                    it.exp5to.toFloat(),
                     "5年以上"
                 )
             )
             chart.centerText = "工作经验"
+
             val dataSet = PieDataSet(entries, "工作经验")
             setCharData(dataSet, chart)
-        })
+        }
 
     }
     /**
@@ -205,7 +207,6 @@ class StatisticsFragment : OnChartValueSelectedListener,BaseFragment<StatisticsV
 
         chart.highlightValues(null)
         chart.invalidate()
-
     }
 
 
@@ -230,6 +231,14 @@ class StatisticsFragment : OnChartValueSelectedListener,BaseFragment<StatisticsV
 
         colors.add(ColorTemplate.getHoloBlue())
         return colors
+    }
+
+    override fun onResume() {
+        mViewModel.getAgeData()
+        mViewModel.getEduData()
+        mViewModel.getExpData()
+        "ok".toast()
+        super.onResume()
     }
 
 

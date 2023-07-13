@@ -44,4 +44,7 @@ object NetUrl {
 
     //经验
     const val EXP_URL = "analysis/work_years"
+
+    //图测试
+    const val TEST_URL = "https://cdn.jsdelivr.net/gh/QminCode/image@main/image-20230713100811672.png"
 }
