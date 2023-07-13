@@ -2,9 +2,7 @@ package com.example.resume.ui.fragment
 
 import android.graphics.Color
 import android.os.Bundle
-import com.example.mvvm.ext.toast
 import com.example.resume.base.BaseFragment
-import com.example.resume.bean.Edu
 import com.example.resume.databinding.FragmentStatisticsBinding
 import com.example.resume.ui.fragment.viewmodel.StatisticsViewModel
 import com.github.mikephil.charting.animation.Easing
@@ -18,7 +16,6 @@ import com.github.mikephil.charting.formatter.PercentFormatter
 import com.github.mikephil.charting.highlight.Highlight
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener
 import com.github.mikephil.charting.utils.ColorTemplate
-import kotlin.enums.EnumEntries
 
 
 /**
@@ -92,26 +89,52 @@ class StatisticsFragment : OnChartValueSelectedListener,BaseFragment<StatisticsV
 
         // NOTE: The order of the entries when being added to the entries array determines their position around the center of
         // the chart.
-        mViewModel.EduData.observe(this) {
+        mViewModel.eduData.observe(this) {
             val entries = ArrayList<PieEntry>()
-            entries.add(
+            if(it.doctor != 0){entries.add(
                 PieEntry(
-                    it.PhD.toFloat(),
+                    it.doctor.toFloat(),
                     "博士"
                 )
-            )
-            entries.add(
+            )}
+
+            if(it.master != 0){entries.add(
                 PieEntry(
                     it.master.toFloat(),
                     "硕士"
                 )
-            )
-            entries.add(
+            )}
+
+            if(it.undergraduate != 0){entries.add(
                 PieEntry(
                     it.undergraduate.toFloat(),
                     "本科"
                 )
-            )
+            )}
+
+            if(it.juniorCollege != 0){entries.add(
+                PieEntry(
+                    it.juniorCollege.toFloat(),
+                    "大专"
+                )
+            )}
+
+            if(it.highSchool != 0){
+                entries.add(
+                    PieEntry(
+                        it.highSchool.toFloat(),
+                        "高中"
+                    )
+                )
+            }
+
+            if(it.middle != 0){entries.add(
+                PieEntry(
+                    it.middle.toFloat(),
+                    "初中"
+                )
+            )}
+
             chart.centerText = "学历"
             val dataSet = PieDataSet(entries, "学历")
             setCharData(dataSet, chart)
@@ -119,32 +142,37 @@ class StatisticsFragment : OnChartValueSelectedListener,BaseFragment<StatisticsV
     }
 
     private fun setAgeData(chart : PieChart){
-        mViewModel.AgeData.observe(this) {
+        mViewModel.ageData.observe(this) {
             val entries = ArrayList<PieEntry>()
-            entries.add(
+
+            if(it[0].age1825 != 0){entries.add(
                 PieEntry(
-                    it.age18to25.toFloat(),
+                    it[0].age1825.toFloat(),
                     "18到25岁"
                 )
-            )
-            entries.add(
+            )}
+
+            if(it[0].age2630 != 0){entries.add(
                 PieEntry(
-                    it.age26to30.toFloat(),
+                    it[0].age2630.toFloat(),
                     "26到30岁"
                 )
-            )
-            entries.add(
+            )}
+
+            if(it[0].age3135 != 0){entries.add(
                 PieEntry(
-                    it.age31to35.toFloat(),
+                    it[0].age3135.toFloat(),
                     "31到35岁"
                 )
-            )
-            entries.add(
+            )}
+
+            if(it[0].age35 != 0){entries.add(
                 PieEntry(
-                    it.age35to.toFloat(),
+                    it[0].age35.toFloat(),
                     "35岁以上"
                 )
-            )
+            )}
+
             chart.centerText = "年龄"
             val dataSet = PieDataSet(entries, "年龄")
             setCharData(dataSet, chart)
@@ -152,32 +180,36 @@ class StatisticsFragment : OnChartValueSelectedListener,BaseFragment<StatisticsV
     }
 
     fun setExpData(chart : PieChart){
-        mViewModel.ExpData.observe(this) {
+        mViewModel.expData.observe(this) {
             val entries = ArrayList<PieEntry>()
-            entries.add(
+            if(it.year0 != 0){entries.add(
                 PieEntry(
-                    it.exp0.toFloat(),
+                    it.year0.toFloat(),
                     "0年"
                 )
-            )
-            entries.add(
+            )}
+
+            if(it.`_$Year13189` !=0){entries.add(
                 PieEntry(
-                    it.exp1to3.toFloat(),
+                    it.`_$Year13189`.toFloat(),
                     "1-3年"
                 )
-            )
-            entries.add(
+            )}
+
+            if(it.`_$Year45321` !=0){entries.add(
                 PieEntry(
-                    it.exp3to5.toFloat(),
+                    it.`_$Year45321`.toFloat(),
                     "3-5年"
                 )
-            )
-            entries.add(
+            )}
+
+            if(it.`_$Year563` != 0){entries.add(
                 PieEntry(
-                    it.exp5to.toFloat(),
+                    it.`_$Year563`.toFloat(),
                     "5年以上"
                 )
-            )
+            )}
+
             chart.centerText = "工作经验"
 
             val dataSet = PieDataSet(entries, "工作经验")
@@ -237,7 +269,6 @@ class StatisticsFragment : OnChartValueSelectedListener,BaseFragment<StatisticsV
         mViewModel.getAgeData()
         mViewModel.getEduData()
         mViewModel.getExpData()
-        "ok".toast()
         super.onResume()
     }
 

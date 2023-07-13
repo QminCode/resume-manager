@@ -7,7 +7,26 @@ package com.example.resume.bean
  * @version:
  */
 data class Edu(
-    var PhD : Int,  //博士人数
-    var master : Int,   //硕士人数
-    var undergraduate : Int,    //本科人数
+    var primary : Int,
+
+    var middle : Int,
+
+    /**
+     * 职高
+     */
+    var polytechnic : Int,
+
+    var highSchool : Int,
+
+    /**
+     * 大专
+     */
+    var juniorCollege : Int,
+
+    var undergraduate : Int,
+
+    var master : Int,
+
+    var doctor : Int
+
 )

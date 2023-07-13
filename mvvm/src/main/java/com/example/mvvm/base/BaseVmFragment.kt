@@ -186,10 +186,11 @@ abstract class BaseVmFragment<VM : com.example.mvvm.base.BaseViewModel> : Fragme
             }
             //当请求失败时
             showError.observe(viewLifecycleOwner) {
-                if (it.loadingType == LoadingType.LOADING_XML) {
+                if (it.loadingType == LoadingType.LOADING_NULL) {
                     showErrorUi(it.errorMessage)
                 }
-                showErrorUi(it.errorMessage)
+                // TODO: 错误页 
+                //showErrorUi(it.errorMessage)
                 onRequestError(it)
             }
             //如果是 LoadingType.LOADING_XML，当请求成功时 会显示正常的成功布局

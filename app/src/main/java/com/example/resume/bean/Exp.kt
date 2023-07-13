@@ -1,14 +1,26 @@
 package com.example.resume.bean
 
-/**
- * @author: playboi_YzY
- * @date: 2023/7/11 17:37
- * @description: 工作经验统计数据
- * @version:
- */
+import com.google.gson.annotations.SerializedName
+
+
 data class Exp(
-    var exp0 : Int,
-    var exp1to3 : Int,
-    var exp3to5 : Int,
-    var exp5to : Int
+    var year0 : Int,
+
+    /**
+     * 1-3
+     */
+    @SerializedName("year1~3")
+    var `_$Year13189` : Int,
+
+    /**
+     * 3-5
+     */
+    @SerializedName("year4~5")
+    var `_$Year45321` : Int,
+
+    /**
+     * >5
+     */
+    @SerializedName("year>5")
+    var `_$Year563` : Int
 )

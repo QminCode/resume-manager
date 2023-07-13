@@ -223,7 +223,7 @@ class HttpRequestDsl {
     var loadingMessage: String = "请求网络中..."
 
     /**
-     * 请求时loading类型 默认请求时不显示loading
+     * 请求时loading类型 默认请求时bu显示loading
      */
     @LoadingType
     var loadingType = LoadingType.LOADING_NULL

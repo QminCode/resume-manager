@@ -2,9 +2,11 @@ package com.example.resume.ui.fragment.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import com.example.mvvm.base.BaseViewModel
+import com.example.mvvm.ext.rxHttpRequest
 import com.example.resume.bean.Age
 import com.example.resume.bean.Edu
 import com.example.resume.bean.Exp
+import com.example.resume.bean.repository.UserRepository
 
 /**
  * @author: playboi_YzY
@@ -14,17 +16,29 @@ import com.example.resume.bean.Exp
  */
 class StatisticsViewModel : BaseViewModel(){
 
-    var EduData = MutableLiveData<Edu>()
-    var AgeData = MutableLiveData<Age>()
-    var ExpData = MutableLiveData<Exp>()
+    var eduData = MutableLiveData<Edu>()
+    var ageData = MutableLiveData<Age>()
+    var expData = MutableLiveData<Exp>()
 
     fun getEduData(){
-        EduData.value = Edu(30,20,45)
+        rxHttpRequest {
+            onRequest = {
+                eduData.value = UserRepository.getEduData().await()
+            }
+        }
     }
     fun getAgeData(){
-        AgeData.value = Age(22,41,30,5)
+        rxHttpRequest {
+            onRequest = {
+                ageData.value = UserRepository.getAgeData().await()
+            }
+        }
     }
     fun getExpData(){
-        ExpData.value = Exp(50,20,10,10)
+        rxHttpRequest {
+            onRequest = {
+                expData.value = UserRepository.getExpData().await()
+            }
+        }
     }
 }
