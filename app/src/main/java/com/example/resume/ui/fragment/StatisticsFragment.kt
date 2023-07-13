@@ -135,6 +135,13 @@ class StatisticsFragment : OnChartValueSelectedListener,BaseFragment<StatisticsV
                 )
             )}
 
+            if(it.primary != 0){entries.add(
+                PieEntry(
+                    it.primary.toFloat(),
+                    "小学"
+                )
+            )}
+
             chart.centerText = "学历"
             val dataSet = PieDataSet(entries, "学历")
             setCharData(dataSet, chart)
