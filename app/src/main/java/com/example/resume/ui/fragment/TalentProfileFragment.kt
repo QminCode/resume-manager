@@ -178,10 +178,10 @@ class TalentProfileFragment :Fragment() {
                         Modifier
                             .fillMaxWidth()
                             .padding(30.dp),
-                        label = { Text(text = "年龄") },
+                        label = { Text(text = "工作年限") },
                         placeholder = {
                             Text(
-                                text = "请输入年龄",
+                                text = "请输入工作年限",
                                 fontSize = 12.sp,
                                 color = Color.Blue
                             )
@@ -203,7 +203,13 @@ class TalentProfileFragment :Fragment() {
 
                     Button(
                         onClick = { lifecycleScope.launch {
-                            var newItem=RxHttp.get("http://shuzhirecruit.nat300.top/similarity_v2/${textName}。${textDescribe}。${text_xueli.value}。${age}").toAwait<Inform>().await()
+                            val list= listOf<String>("小学",
+                                "初中", "中专", "高中", "大专", "本科", "硕士", "博士"
+                            )
+                            val newItem=RxHttp.get("http://shuzhirecruit.nat300.top/similarity/${textName}")
+                                .addHeader("working_years",age)
+                                .addHeader("highest_education_level",list.indexOf(text_xueli.value).toString())
+                                .toAwait<Inform>().await()
                             itemList.clear()
                             for (item in newItem){
                                 itemList.add(item)
@@ -265,7 +271,7 @@ class TalentProfileFragment :Fragment() {
                 text = item.position, color = Color.Black, fontSize = 20.sp, fontStyle = FontStyle.Italic
             )
             Text(
-                text = "相似度匹配:${item.similarity}",
+                text = "相似度匹配:${(item.similarity*100).toInt()}%",
             )
             Row(Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.Start,
@@ -333,83 +339,84 @@ class TalentProfileFragment :Fragment() {
 
 
 
-    @Composable
-    fun Selector(text:MutableState<String>) {
-        var expanded by remember {
-            mutableStateOf(false)
-        }
 
-        Column {
-            Text(text = "${text.value} ▼", modifier = Modifier
-                .padding(6.dp)
-                .background(Color.Cyan, shape = RoundedCornerShape(6.dp))
-                .clickable {
-                    expanded = !expanded
-                }
-                .padding(5.dp) )
 
-            DropdownMenu(
-                expanded = expanded, onDismissRequest = {
-                    expanded = false
-                } ,
-                properties = PopupProperties(
-                    focusable = true,
-                    dismissOnBackPress = false,
-                    dismissOnClickOutside = true,
-                    securePolicy = SecureFlagPolicy.SecureOn//是否可以截图。
-                )
-            ) {
-                DropdownMenuItem(onClick = {
-                    expanded = !expanded
-                    text.value="博士"
-                } ) {
-                    Text(text = "博士")
-                }
+}
+@Composable
+fun Selector(text:MutableState<String>) {
+    var expanded by remember {
+        mutableStateOf(false)
+    }
 
-                DropdownMenuItem(onClick = {
-                    expanded = !expanded
-                    text.value="硕士"
-                } ) {
-                    Text(text = "硕士")
-                }
-                DropdownMenuItem(onClick = {
-                    expanded = !expanded
-                    text.value="本科"
-                } ) {
-                    Text(text = "本科")
-                }
-                DropdownMenuItem(onClick = {
-                    expanded = !expanded
-                    text.value="大专"
-                } ) {
-                    Text(text = "大专")
-                }
-                DropdownMenuItem(onClick = {
-                    expanded = !expanded
-                    text.value="中专"
-                } ) {
-                    Text(text = "中专")
-                }
-                DropdownMenuItem(onClick = {
-                    expanded = !expanded
-                    text.value="高中"
-                } ) {
-                    Text(text = "高中")
-                }
-                DropdownMenuItem(onClick = {
-                    expanded = !expanded
-                    text.value="初中"
-                } ) {
-                    Text(text = "初中")
-                }
-                DropdownMenuItem(onClick = {
-                    expanded = !expanded
-                    text.value="小学"
-                } ) {
-                    Text(text = "小学")
-                }
+    Column {
+        Text(text = "${text.value} ▼", modifier = Modifier
+            .padding(6.dp)
+            .background(Color.Cyan, shape = RoundedCornerShape(6.dp))
+            .clickable {
+                expanded = !expanded
+            }
+            .padding(5.dp) )
+
+        DropdownMenu(
+            expanded = expanded, onDismissRequest = {
+                expanded = false
+            } ,
+            properties = PopupProperties(
+                focusable = true,
+                dismissOnBackPress = false,
+                dismissOnClickOutside = true,
+                securePolicy = SecureFlagPolicy.SecureOn//是否可以截图。
+            )
+        ) {
+            DropdownMenuItem(onClick = {
+                expanded = !expanded
+                text.value="博士"
+            } ) {
+                Text(text = "博士")
+            }
+
+            DropdownMenuItem(onClick = {
+                expanded = !expanded
+                text.value="硕士"
+            } ) {
+                Text(text = "硕士")
+            }
+            DropdownMenuItem(onClick = {
+                expanded = !expanded
+                text.value="本科"
+            } ) {
+                Text(text = "本科")
+            }
+            DropdownMenuItem(onClick = {
+                expanded = !expanded
+                text.value="大专"
+            } ) {
+                Text(text = "大专")
+            }
+            DropdownMenuItem(onClick = {
+                expanded = !expanded
+                text.value="中专"
+            } ) {
+                Text(text = "中专")
+            }
+            DropdownMenuItem(onClick = {
+                expanded = !expanded
+                text.value="高中"
+            } ) {
+                Text(text = "高中")
+            }
+            DropdownMenuItem(onClick = {
+                expanded = !expanded
+                text.value="初中"
+            } ) {
+                Text(text = "初中")
+            }
+            DropdownMenuItem(onClick = {
+                expanded = !expanded
+                text.value="小学"
+            } ) {
+                Text(text = "小学")
             }
         }
     }
-
 }

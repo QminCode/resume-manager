@@ -200,11 +200,85 @@ class AddManuallyFragment : ComponentActivity() {
                     cursorColor = Color.Red
                 ),
             )
+            var age by rememberSaveable() { mutableStateOf("") }
+            OutlinedTextField(
+                value =age,
+                onValueChange = { age = it },
+                Modifier
+                    .fillMaxWidth()
+                    .padding(start = 30.dp, end = 30.dp)
+                    .height(60.dp),
+                label = { Text(text = "年龄") },
+                placeholder = {
+                    Text(
+                        text = "年龄",
+                        fontSize = 12.sp,
+                        color = Color.Blue
+                    )
+                },
+                singleLine = true,
+                colors = TextFieldDefaults.textFieldColors(
+                    backgroundColor = Color(0xfff6f9fc),  // 背景等相关颜色
+                    unfocusedIndicatorColor = Color(0xffdde0e3),
+                    focusedIndicatorColor = Color(0xff969eed),//获得焦点时外圈颜色
+                    errorIndicatorColor = Color.Red,
+                    placeholderColor = Color.Red,
+                    textColor = Color.Black,
+                    cursorColor = Color.Red
+                ),
+            )
+            var key_info by rememberSaveable() { mutableStateOf("") }
+            OutlinedTextField(
+                value =key_info,
+                onValueChange = { key_info = it },
+                Modifier
+                    .fillMaxWidth()
+                    .padding(start = 30.dp, end = 30.dp)
+                    .height(60.dp),
+                label = { Text(text = "关键信息") },
+                placeholder = {
+                    Text(
+                        text = "关键信息",
+                        fontSize = 12.sp,
+                        color = Color.Blue
+                    )
+                },
+                singleLine = true,
+                colors = TextFieldDefaults.textFieldColors(
+                    backgroundColor = Color(0xfff6f9fc),  // 背景等相关颜色
+                    unfocusedIndicatorColor = Color(0xffdde0e3),
+                    focusedIndicatorColor = Color(0xff969eed),//获得焦点时外圈颜色
+                    errorIndicatorColor = Color.Red,
+                    placeholderColor = Color.Red,
+                    textColor = Color.Black,
+                    cursorColor = Color.Red
+                ),
+            )
 
             Button(
                 onClick = {
+                    var list= listOf<String>("小学",
+                        "初中", "中专", "高中", "大专", "本科", "硕士", "博士"
+                )
+                    val map= HashMap<String,String>()
+                    val mapInt=HashMap<String,Int>()
+                    map["name"]=textName
+                    mapInt["age"]=age.toInt()
+                    mapInt["highest_education_level"]= list.indexOf(highest_education_level)
+                    map["graduated_school"]=graduated_school
+                    mapInt["working_years"]=working_years.toInt()
+                    map["position"]=position
+                    map["key_info"]=key_info
                     lifecycleScope.launch {
-                            RxHttp.postJson("").add("这是key","value").toFlow<String>()
+                            RxHttp.postJson("http://shuzhirecruit.nat300.top/enter_manually")
+                                .add("name",textName)
+                                .add("age",age.toInt())
+                                .add("highest_education_level",list.indexOf(highest_education_level))
+                                .add("graduated_school",graduated_school)
+                                .add("working_years",working_years.toInt())
+                                .add("position",position)
+                                .add("key_info",key_info)
+                                .addHeader("TYPE","enter_manually").toFlow<String>()
                                 .catch {
                                 //异常回调
                             }.collect {
