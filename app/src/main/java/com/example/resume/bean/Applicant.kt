@@ -30,5 +30,6 @@ data class Applicant(
     val name: String,
     val position: String,
 //    val similarity: Double,
-    val working_years: Int
+    val working_years: Int,
+    val row_num: Int
 )

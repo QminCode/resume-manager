@@ -83,7 +83,8 @@ class ListFragment : BottomSheetListener, BaseFragment<ListViewModel, FragmentLi
         listAdapter.run {
             setOnItemClickListener{ adapter, view, position ->
                 var bundle = Bundle()
-                bundle.putString("image",NetUrl.TEST_URL)
+
+                bundle.putString("image",NetUrl.IMAGE_URL+getItem(position).row_num.toString())
                 toStartActivity(ImageActivity::class.java,  bundle)
             }
         }

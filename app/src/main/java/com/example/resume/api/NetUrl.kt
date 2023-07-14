@@ -46,5 +46,8 @@ object NetUrl {
     const val EXP_URL = "analysis/work_years"
 
     //图测试
-    const val TEST_URL = "https://cdn.jsdelivr.net/gh/QminCode/image@main/image-20230713100811672.png"
+    const val TEST_URL = "http://shuzhirecruit.nat300.top/display_picture/11"
+
+    //图
+    const val IMAGE_URL = "http://shuzhirecruit.nat300.top/display_picture/"
 }

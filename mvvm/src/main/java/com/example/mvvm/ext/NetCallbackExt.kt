@@ -131,7 +131,8 @@ fun <T> com.example.mvvm.base.BaseViewModel.rxHttpRequestCallBack(requestDslClas
             httpRequestDsl.onRequest.invoke(this)
         }.onSuccess {
             //请求完成 走到这里说明请求成功了 如果请求类型为LOADING_XML 那么通知Activity/Fragment展示success 界面
-            if (httpRequestDsl.loadingType == LoadingType.LOADING_XML) {
+            if (httpRequestDsl.loadingType == LoadingType.LOADING_NULL) {
+                // TODO: 成功加载
                 loadingChange.showSuccess.value = true
             }
             //结束loading
