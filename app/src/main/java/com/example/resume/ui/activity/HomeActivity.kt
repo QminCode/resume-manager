@@ -5,6 +5,9 @@ import com.example.resume.ui.fragment.viewmodel.ListViewModel
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
+import com.example.resume.R
+import com.example.resume.base.BaseActivity
+import com.example.resume.databinding.ActivityHomeBinding
 import com.example.resume.ui.fragment.StatisticsFragment
 import com.example.resume.ui.fragment.TalentProfileFragment
 
@@ -59,7 +62,7 @@ fun ViewPager2.initMain(activity: HomeActivity): ViewPager2 {
     //设置适配器
     adapter = object : FragmentStateAdapter(activity) {
         override fun createFragment(position: Int): Fragment {
-            return when (position) {
+            return when (position) {+
                 0 -> {
                     com.example.resume.ui.fragment.ListFragment()
                 }

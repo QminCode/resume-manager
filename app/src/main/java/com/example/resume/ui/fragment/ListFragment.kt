@@ -28,6 +28,7 @@ import com.example.resume.ui.adapter.ListAdapter
 import com.example.resume.ui.fragment.viewmodel.ListViewModel
 import com.kennyc.bottomsheet.BottomSheetListener
 import com.kennyc.bottomsheet.BottomSheetMenuDialogFragment
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.launch
 import rxhttp.toAwait
 import rxhttp.toFlow
@@ -156,6 +157,9 @@ class ListFragment : BottomSheetListener, BaseFragment<ListViewModel, FragmentLi
                         .addFile("file", tempFile)
                         .addHeader("TYPE",mimeType)
                         .toFlow<String>()
+                        .catch {
+                            it.toString().toast()
+                        }
                         .collect{
                             "上传成功".toast()
                         }
