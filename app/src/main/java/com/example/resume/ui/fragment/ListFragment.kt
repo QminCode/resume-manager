@@ -85,14 +85,16 @@ class ListFragment : BottomSheetListener, BaseFragment<ListViewModel, FragmentLi
             setOnItemClickListener{ adapter, view, position ->
                 var bundle = Bundle()
 
-                bundle.putString("image",NetUrl.IMAGE_URL+getItem(position).row_num.toString())
+                bundle.putString("image",NetUrl.IMAGE_URL+(getItem(position).row_num.toString()))
                 toStartActivity(ImageActivity::class.java,  bundle)
             }
         }
 
         mBind.listSmartRefresh.refresh {
             //下拉刷新
-            mViewModel.getList(false)
+            initSort(spinner.selectedItem as String)
+//            mViewModel.getList(false)
+
 
         }.loadMore{
             //上拉加载
@@ -198,6 +200,7 @@ class ListFragment : BottomSheetListener, BaseFragment<ListViewModel, FragmentLi
     }
     private fun initSort(item: String){
         when(item){
+            "默认排序" -> mViewModel.getList()
             "年龄排序(升序)" -> mViewModel.sortAge1()
             "年龄排序(降序)" -> mViewModel.sortAge2()
             "工作经验排序(升序)" -> mViewModel.sortExp1()

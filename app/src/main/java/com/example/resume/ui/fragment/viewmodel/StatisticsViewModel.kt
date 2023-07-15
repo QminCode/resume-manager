@@ -26,6 +26,7 @@ class StatisticsViewModel : BaseViewModel(){
                 eduData.value = UserRepository.getEduData().await()
             }
         }
+//        eduData.value = Edu(10,50,30,0,0,0,0,0)
     }
     fun getAgeData(){
         rxHttpRequest {

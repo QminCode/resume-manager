@@ -5,6 +5,7 @@ import android.os.Bundle
 import com.example.resume.base.BaseFragment
 import com.example.resume.databinding.FragmentStatisticsBinding
 import com.example.resume.ui.fragment.viewmodel.StatisticsViewModel
+import com.example.resume.util.PercentHelper
 import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.charts.PieChart
 import com.github.mikephil.charting.components.Legend
@@ -12,7 +13,6 @@ import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
-import com.github.mikephil.charting.formatter.PercentFormatter
 import com.github.mikephil.charting.highlight.Highlight
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener
 import com.github.mikephil.charting.utils.ColorTemplate
@@ -239,11 +239,11 @@ class StatisticsFragment : OnChartValueSelectedListener,BaseFragment<StatisticsV
 
         dataSet.yValuePosition = PieDataSet.ValuePosition.OUTSIDE_SLICE
         val data = PieData(dataSet)
-        data.setValueFormatter(PercentFormatter())
+//        data.setValueFormatter(PercentFormatter())
+        data.setValueFormatter(PercentHelper())
         data.setValueTextSize(15f)
         data.setValueTextColor(Color.BLACK)
         chart.data = data
-
         chart.highlightValues(null)
         chart.invalidate()
     }
