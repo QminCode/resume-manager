@@ -3,6 +3,7 @@ package com.example.resume.ui.fragment.viewmodel
 import androidx.lifecycle.MutableLiveData
 import com.example.mvvm.base.BaseViewModel
 import com.example.mvvm.ext.rxHttpRequest
+import com.example.mvvm.ext.toast
 import com.example.mvvm.net.LoadingType
 import com.example.resume.api.NetUrl
 import com.example.resume.bean.Applicant
@@ -31,7 +32,6 @@ class ListViewModel : BaseViewModel(){
                 listData.value = UserRepository.getList().await()
             }
             requestCode = NetUrl.SIMILARITY_URL
-
         }
     }
 
